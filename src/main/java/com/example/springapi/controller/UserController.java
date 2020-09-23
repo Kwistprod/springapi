@@ -35,7 +35,7 @@ public class UserController {
         return userRepository.save(user);
     }
 
-    @PutMapping("/upgusers/{id}")
+    @PostMapping("/upgusers/{id}")
     public User upgUser(@PathVariable("id") long id, @RequestBody User user){
         User tmp = userRepository.getOne(id);
         tmp.setLogin(user.getLogin());
