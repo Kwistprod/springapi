@@ -35,8 +35,16 @@ public class UserController {
         return userRepository.save(user);
     }
 
-    @PutMapping("/upgusers")
-    public User upgUser(@RequestBody User user){
-        return userRepository.save(user);
+    @PutMapping("/upgusers/{id}")
+    public User upgUser(@PathVariable("id") long id, @RequestBody User user){
+        User tmp = userRepository.getOne(id);
+        tmp.setLogin(user.getLogin());
+        tmp.setCourse(user.getCourse());
+        tmp.setGroup(user.getGroup());
+        String pass = user.getPassword();
+        if(pass.equals("") && pass != null){
+            tmp.setPassword(pass);
+        }
+        return userRepository.save(tmp);
     }
 }
