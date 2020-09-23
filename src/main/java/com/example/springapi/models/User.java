@@ -15,11 +15,11 @@ public class User {
     private Long id;
 
     @NotNull
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false)
     private String login;
 
     @NotNull
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false)
     private String password;
 
     @Column
