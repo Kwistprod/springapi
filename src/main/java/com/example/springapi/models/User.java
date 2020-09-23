@@ -61,11 +61,11 @@ public class User {
         this.course = course;
     }
 
-    public String getGroup() {
+    public String getNumgroup() {
         return numgroup;
     }
 
-    public void setGroup(String numgroup) {
+    public void setNumgroup(String numgroup) {
         this.numgroup = numgroup;
     }
 }
