@@ -22,10 +22,16 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @PostMapping("/users")
+    @PostMapping("/auth")
     @ResponseBody
     @JsonAnyGetter
     public Map<String, Object> authUser(@RequestBody User user) {
         return userRepository.AuthUser(user.getLogin(), user.getPassword());
+    }
+
+    @PostMapping("/users")
+    @ResponseBody
+    public User regUser(@RequestBody User user){
+        return userRepository.save(user);
     }
 }
