@@ -34,4 +34,9 @@ public class UserController {
     public User regUser(@RequestBody User user){
         return userRepository.save(user);
     }
+
+    @PutMapping("/upgusers")
+    public User upgUser(@RequestBody User user){
+        return userRepository.save(user);
+    }
 }
