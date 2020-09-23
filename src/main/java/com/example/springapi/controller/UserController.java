@@ -39,6 +39,12 @@ public class UserController {
     public User upgUser(@PathVariable("id") long id, @RequestBody User user){
         User tmp = userRepository.getOne(id);
         tmp.setCourse(user.getCourse());
+        if(user.getLogin() != null){
+            tmp.setLogin(user.getLogin());
+        }
+        if(user.getPassword() != null){
+            tmp.setPassword(user.getPassword());
+        }
         tmp.setNumgroup(user.getNumgroup());
         return userRepository.save(tmp);
     }
