@@ -39,10 +39,10 @@ public class UserController {
     public User upgUser(@PathVariable("id") long id, @RequestBody User user){
         User tmp = userRepository.getOne(id);
         tmp.setCourse(user.getCourse());
-        if(user.getLogin() != null){
+        if(user.getLogin() != null && !user.getLogin().equals("")){
             tmp.setLogin(user.getLogin());
         }
-        if(user.getPassword() != null){
+        if(user.getPassword() != null && !user.getPassword().equals("")){
             tmp.setPassword(user.getPassword());
         }
         tmp.setNumgroup(user.getNumgroup());
