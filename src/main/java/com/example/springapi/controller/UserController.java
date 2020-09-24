@@ -30,17 +30,17 @@ public class UserController {
         return userRepository.AuthUser(user.getLogin(), user.getPassword());
     }
 
-    @PostMapping("/users")
+    @PostMapping("/reg")
     @ResponseBody
     public Map<String, String> regUser(@RequestBody User user){
         Map<String, String> map = new HashMap<>();
-        map.put("action", "update");
+        map.put("action", "register");
         if (StringUtils.hasText(user.getLogin()) && StringUtils.hasText(user.getPassword())){
             try {
                 userRepository.save(user);
                 map.put("result", "done");
 
-            }catch(Exception e){
+            } catch(Exception e) {
                 map.put("result", e.toString());
             }
         }
@@ -48,25 +48,36 @@ public class UserController {
     }
 
     @PutMapping("/user/{id}")
-    public User updateUser(@PathVariable("id") long id, @RequestBody User user){
+    public Map<String, String> updateUser(@PathVariable("id") long id, @RequestBody User user){
+        Map<String, String> map = new HashMap<>();
+        map.put("action", "update");
 
-        User tmp = userRepository.getOne(id);
-        String course = user.getCourse();
-        String group = user.getNumgroup();
-        String pass = user.getPassword();
-        String login = user.getLogin();
-        if (StringUtils.hasText(course)) {
-            tmp.setCourse(course);
+        try {
+
+            User tmp = userRepository.getOne(id);
+            String course = user.getCourse();
+            String group = user.getNumgroup();
+            String pass = user.getPassword();
+            String login = user.getLogin();
+            if (StringUtils.hasText(course)) {
+                tmp.setCourse(course);
+            }
+            if (StringUtils.hasText(login)) {
+                tmp.setLogin(login);
+            }
+            if (StringUtils.hasText(pass)) {
+                tmp.setPassword(pass);
+            }
+            if (StringUtils.hasText(group)) {
+                tmp.setNumgroup(group);
+            }
+
+            userRepository.save(tmp);
+            map.put("result", "done");
+
+        }catch(Exception e){
+            map.put("result", e.toString());
         }
-        if (StringUtils.hasText(login)) {
-            tmp.setLogin(login);
-        }
-        if (StringUtils.hasText(pass)) {
-            tmp.setPassword(pass);
-        }
-        if (StringUtils.hasText(group)) {
-            tmp.setNumgroup(group);
-        }
-        return userRepository.save(tmp);
+        return map;
     }
 }
