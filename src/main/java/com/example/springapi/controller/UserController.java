@@ -48,13 +48,10 @@ public class UserController {
     }
 
     @PutMapping("/user/{id}")
-    public Map<String, String> updateUser(@PathVariable("id") long id, @RequestBody User user){
-        Map<String, String> map = new HashMap<>();
-        map.put("action", "update");
-
+    public User updateUser(@PathVariable("id") long id, @RequestBody User user){
+        User tmp;
         try {
-
-            User tmp = userRepository.getOne(id);
+            tmp = userRepository.getOne(id);
             String course = user.getCourse();
             String group = user.getNumgroup();
             String pass = user.getPassword();
@@ -71,13 +68,11 @@ public class UserController {
             if (StringUtils.hasText(group)) {
                 tmp.setNumgroup(group);
             }
-
-            userRepository.save(tmp);
-            map.put("result", "done");
-
+            tmp = userRepository.save(tmp);
+            tmp.setPassword("");
         }catch(Exception e){
-            map.put("result", e.toString());
+            tmp = null;
         }
-        return map;
+        return tmp;
     }
 }
