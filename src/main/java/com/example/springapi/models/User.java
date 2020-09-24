@@ -68,4 +68,5 @@ public class User {
     public void setNumgroup(String numgroup) {
         this.numgroup = numgroup;
     }
+
 }

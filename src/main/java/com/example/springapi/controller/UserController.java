@@ -4,13 +4,15 @@ import com.example.springapi.models.User;
 import com.example.springapi.repository.UserRepository;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/api/account")
 @CrossOrigin(origins="*")
 public class UserController {
     @Autowired
@@ -21,7 +23,7 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @PostMapping("/auth")
+    @PostMapping("/user")
     @ResponseBody
     @JsonAnyGetter
     public Map<String, Object> authUser(@RequestBody User user) {
@@ -30,30 +32,40 @@ public class UserController {
 
     @PostMapping("/users")
     @ResponseBody
-    public User regUser(@RequestBody User user){
-        return userRepository.save(user);
+    public Map<String, String> regUser(@RequestBody User user){
+        Map<String, String> map = new HashMap<>();
+        map.put("action", "update");
+        if (StringUtils.hasText(user.getLogin()) && StringUtils.hasText(user.getPassword())){
+            try {
+                userRepository.save(user);
+                map.put("result", "done");
+
+            }catch(Exception e){
+                map.put("result", e.toString());
+            }
+        }
+        return map;
     }
 
-    @PutMapping("/upguser/{id}")
-    public User upgUser(@PathVariable("id") long id, @RequestBody User user){
-        User tmp = userRepository.getOne(id);
+    @PutMapping("/user/{id}")
+    public User updateUser(@PathVariable("id") long id, @RequestBody User user){
 
+        User tmp = userRepository.getOne(id);
         String course = user.getCourse();
         String group = user.getNumgroup();
         String pass = user.getPassword();
         String login = user.getLogin();
-
-        if(course != null && !course.equals("")) {
-            tmp.setCourse(user.getCourse());
+        if (StringUtils.hasText(course)) {
+            tmp.setCourse(course);
         }
-        if(login != null && !login.equals("")){
-            tmp.setLogin(user.getLogin());
+        if (StringUtils.hasText(login)) {
+            tmp.setLogin(login);
         }
-        if(pass != null && !pass.equals("")){
-            tmp.setPassword(user.getPassword());
+        if (StringUtils.hasText(pass)) {
+            tmp.setPassword(pass);
         }
-        if(group != null && !group.equals("")) {
-            tmp.setNumgroup(user.getNumgroup());
+        if (StringUtils.hasText(group)) {
+            tmp.setNumgroup(group);
         }
         return userRepository.save(tmp);
     }
