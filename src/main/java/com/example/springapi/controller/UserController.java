@@ -10,10 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/account")
 @CrossOrigin(origins="*")
 public class UserController {
-
     @Autowired
     UserRepository userRepository;
 
@@ -35,7 +34,7 @@ public class UserController {
         return userRepository.save(user);
     }
 
-    @PutMapping("/upgusers/{id}")
+    @PutMapping("/upguser/{id}")
     public User upgUser(@PathVariable("id") long id, @RequestBody User user){
         User tmp = userRepository.getOne(id);
         tmp.setCourse(user.getCourse());
