@@ -32,13 +32,15 @@ public class UserController {
 
     @PostMapping("/reg")
     @ResponseBody
-    public Map<String, String> regUser(@RequestBody User user){
-        Map<String, String> map = new HashMap<>();
+    public Map<String, Object> regUser(@RequestBody User user){
+        Map<String, Object> map = new HashMap<>();
         map.put("action", "register");
         if (StringUtils.hasText(user.getLogin()) && StringUtils.hasText(user.getPassword())){
             try {
-                userRepository.save(user);
+                User u = userRepository.save(user);
                 map.put("result", "done");
+                map.put("id", u.getId());
+                map.put("login", u.getLogin());
 
             } catch(Exception e) {
                 map.put("result", e.toString());
@@ -69,6 +71,7 @@ public class UserController {
                 tmp.setNumgroup(group);
             }
             tmp = userRepository.save(tmp);
+
         }catch(Exception e){
             tmp = null;
         }
