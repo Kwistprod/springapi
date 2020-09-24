@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    @Query("select u.id as id, u.login as login, u.course as course, u.numgroup as group from users u where u.login = :login and u.password = :password")
+    @Query("select u.id as id, u.login as login, u.course as course, u.numgroup as numgroup from users u where u.login = :login and u.password = :password")
     @JsonAnyGetter
     Map<String, Object> AuthUser(@Param("login") String login, @Param("password") String password);
 }
