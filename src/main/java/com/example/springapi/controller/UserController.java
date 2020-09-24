@@ -71,7 +71,7 @@ public class UserController {
                 tmp.setNumgroup(group);
             }
             tmp = userRepository.save(tmp);
-
+            tmp.setPassword("");
         }catch(Exception e){
             tmp = null;
         }
