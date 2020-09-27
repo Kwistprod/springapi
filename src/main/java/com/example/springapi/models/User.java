@@ -25,6 +25,7 @@ public class User {
     @Column
     private String course;
 
+
     @Column
     private String numgroup;
 
