@@ -15,7 +15,7 @@ public class User {
     private Long id;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String login;
 
     @NotNull
