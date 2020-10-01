@@ -60,6 +60,8 @@ public class UserController {
             String login = user.getLogin();
             if (StringUtils.hasText(course)) {
                 tmp.setCourse(course);
+            } else{
+                tmp.setCourse("");
             }
             if (StringUtils.hasText(login)) {
                 tmp.setLogin(login);
@@ -69,6 +71,8 @@ public class UserController {
             }
             if (StringUtils.hasText(group)) {
                 tmp.setNumgroup(group);
+            } else{
+                tmp.setNumgroup("");
             }
             tmp = userRepository.save(tmp);
             tmp.setPassword("");
