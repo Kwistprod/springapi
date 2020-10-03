@@ -3,6 +3,8 @@ package com.example.springapi.controller;
 import com.example.springapi.models.Day;
 import com.example.springapi.models.Schedule;
 import com.example.springapi.repository.ScheduleRepository;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +27,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/{id}")
-    List<Day> getSchedule(@PathVariable("id") long id){
+    String getSchedule(@PathVariable("id") long id) throws Exception{
         Schedule sch = scheduleRepository.getByUser_id(id);
         List<Day> days = new ArrayList<>();
         Day monday = getDay(sch.getMonday());
@@ -40,7 +42,7 @@ public class ScheduleController {
         days.add(thursday);
         days.add(friday);
         days.add(saturday);
-        return days;
+        return new ObjectMapper().writeValueAsString(days);
     }
 
 

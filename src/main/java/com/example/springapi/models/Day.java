@@ -1,5 +1,6 @@
 package com.example.springapi.models;
 
+
 public class Day {
     private String day;
     private String class1;
