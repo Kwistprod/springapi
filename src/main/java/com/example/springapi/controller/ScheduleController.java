@@ -28,7 +28,7 @@ public class ScheduleController {
 
     @GetMapping("/{id}")
     String getSchedule(@PathVariable("id") long id) throws Exception{
-        Schedule sch = scheduleRepository.getByUser_id(id);
+        Schedule sch = scheduleRepository.gett(id);
         List<Day> days = new ArrayList<>();
         Day monday = getDay(sch.getMonday());
         Day tuesday = getDay(sch.getTuesday());
