@@ -19,6 +19,11 @@ public class ScheduleController {
     @Autowired
     ScheduleRepository scheduleRepository;
 
+    @GetMapping("/get")
+    List<Schedule> get(){
+        return scheduleRepository.findAll();
+    }
+
     @GetMapping("/{id}")
     List<Day> getSchedule(@PathVariable("id") long id){
         Schedule sch = scheduleRepository.getByUser_id(id);
