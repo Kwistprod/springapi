@@ -30,6 +30,7 @@ public class ScheduleController {
     String getSchedule(@PathVariable("id") long id) throws Exception{
         Schedule sch = scheduleRepository.gett(id);
         List<Day> days = new ArrayList<>();
+        System.out.println(sch.getMonday());
         Day monday = getDay(sch.getMonday());
         Day tuesday = getDay(sch.getTuesday());
         Day wednesday = getDay(sch.getWednesday());
