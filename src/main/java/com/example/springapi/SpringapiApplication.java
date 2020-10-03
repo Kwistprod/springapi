@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @EnableJpaAuditing
 @Controller
-@RequestMapping("/api")
 public class SpringapiApplication {
 
     public static void main(String[] args) {
