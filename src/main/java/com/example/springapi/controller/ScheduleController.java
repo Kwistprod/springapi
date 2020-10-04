@@ -31,16 +31,11 @@ public class ScheduleController {
     @PostMapping("/schedule")
     Map<String, Object> addSchedule(@RequestBody Schedule schedule){
         Map<String, Object> map = new HashMap<>();
-        Schedule sch = null;
-        try{
-            sch = scheduleRepository.getOne(schedule.getUser_id());
-        }catch (Exception e){
-
-        }
-        if(sch == null){
+        boolean isExists = scheduleRepository.existsById(schedule.getUser_id());
+        if(isExists){
             map.put("result", "error");
         } else{
-            map.put("result", sch.getUser_id());
+            map.put("result", "true");
         }
         return map;
     }
