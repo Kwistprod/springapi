@@ -19,6 +19,40 @@ public class Day {
         this.class5 = "";
         this.class6 = "";
     }
+    public Day(int id){
+        switch (id){
+            case 1: {
+                this.day = "Monday";
+                break;
+            }
+            case 2: {
+                this.day = "Tuesday";
+                break;
+            }
+            case 3: {
+                this.day = "Wednesday";
+                break;
+            }
+            case 4: {
+                this.day = "Thursday";
+                break;
+            }
+            case 5: {
+                this.day = "Friday";
+                break;
+            }
+            case 6: {
+                this.day = "Saturday";
+                break;
+            }
+        }
+        this.class1 = "";
+        this.class2 = "";
+        this.class3 = "";
+        this.class4 = "";
+        this.class5 = "";
+        this.class6 = "";
+    }
     public Day(String day, String class1, String class2, String class3, String class4, String class5, String class6){
         this.day = day;
         this.class1 = class1;
