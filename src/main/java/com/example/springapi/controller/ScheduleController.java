@@ -38,7 +38,7 @@ public class ScheduleController {
 
         }
         if(sch == null){
-            map.put("result", "error")
+            map.put("result", "error");
         } else{
             map.put("result", "done");
         }
