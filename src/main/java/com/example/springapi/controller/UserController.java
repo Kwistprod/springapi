@@ -12,25 +12,25 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping("/api")
 @CrossOrigin(origins="*")
 public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/users")
+    @GetMapping("/account/users")
     public List<User> getAll(){
         return userRepository.findAll();
     }
 
-    @PostMapping("/user")
+    @PostMapping("/account/user")
     @ResponseBody
     @JsonAnyGetter
     public Map<String, Object> authUser(@RequestBody User user) {
         return userRepository.AuthUser(user.getLogin(), user.getPassword());
     }
 
-    @PostMapping("/reg")
+    @PostMapping("/account/reg")
     @ResponseBody
     public Map<String, Object> regUser(@RequestBody User user){
         Map<String, Object> map = new HashMap<>();
@@ -49,7 +49,7 @@ public class UserController {
         return map;
     }
 
-    @PutMapping("/user/{id}")
+    @PutMapping("/account/user/{id}")
     public User updateUser(@PathVariable("id") long id, @RequestBody User user){
         User tmp;
         try {

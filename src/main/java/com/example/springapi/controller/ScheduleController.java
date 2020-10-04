@@ -17,35 +17,35 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @RestController
-@RequestMapping(value = "/api/schedule")
+@RequestMapping(value = "/api")
 @CrossOrigin(origins="*")
 public class ScheduleController {
     @Autowired
     ScheduleRepository scheduleRepository;
 
-    @GetMapping("/getAll")
+    @GetMapping("/schedule/getAll")
     List<Schedule> get(){
         return scheduleRepository.findAll();
     }
 
-    @PostMapping("/{id}")
-    Map<String, Object> addSchedule(@PathVariable("id") long id, @RequestBody Schedule schedule){
+    @PostMapping("/schedule")
+    Map<String, Object> addSchedule(@RequestBody Schedule schedule){
         Map<String, Object> map = new HashMap<>();
         Schedule sch = null;
         try{
-            sch = scheduleRepository.getOne(id);
+            sch = scheduleRepository.getOne(schedule.getUser_id());
         }catch (Exception e){
 
         }
         if(sch == null){
             map.put("result", "error");
         } else{
-            map.put("result", "done");
+            map.put("result", sch.getUser_id());
         }
         return map;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/schedule/{id}")
     List<Day> getSchedule(@PathVariable("id") long id) throws Exception{
         Schedule sch = scheduleRepository.getOne(id);
         List<Day> days = new ArrayList<>();
