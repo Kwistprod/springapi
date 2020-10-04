@@ -31,12 +31,8 @@ public class ScheduleController {
     @PostMapping("/schedule")
     Map<String, Object> addSchedule(@RequestBody Schedule schedule){
         Map<String, Object> map = new HashMap<>();
-        boolean isExists = scheduleRepository.existsById(schedule.getUser_id());
-        if(isExists){
-            map.put("result", "error");
-        } else{
-            map.put("result", "true");
-        }
+        scheduleRepository.save(schedule);
+        map.put("result", "done");
         return map;
     }
 
