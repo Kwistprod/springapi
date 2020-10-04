@@ -1,17 +1,17 @@
 package com.example.springapi.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
 @Entity(name="schedule")
 @EntityListeners(AuditingEntityListener.class)
-public class Schedule {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, updatable = false, unique = true)
-    private Long schedule_id;
+public class Schedule{
 
+    @Id
     @Column(unique = true, nullable = false)
     private Long user_id;
 
@@ -27,14 +27,6 @@ public class Schedule {
     private String friday;
     @Column
     private String saturday;
-
-    public Long getSchedule_id() {
-        return schedule_id;
-    }
-
-    public void setSchedule_id(Long schedule_id) {
-        this.schedule_id = schedule_id;
-    }
 
     public Long getUser_id() {
         return user_id;

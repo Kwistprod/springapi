@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +21,7 @@ import java.util.regex.Pattern;
 public class ScheduleController {
     @Autowired
     ScheduleRepository scheduleRepository;
+    private Schedule schedule;
 
     @GetMapping("/get")
     List<Schedule> get(){
@@ -28,7 +30,7 @@ public class ScheduleController {
 
     @GetMapping("/{id}")
     String getSchedule(@PathVariable("id") long id) throws Exception{
-        Schedule sch = scheduleRepository.gett(id);
+        Schedule sch = scheduleRepository.getOne(id);
         List<Day> days = new ArrayList<>();
         System.out.println(sch.getMonday());
         Day monday = getDay(sch.getMonday());
@@ -43,7 +45,7 @@ public class ScheduleController {
         days.add(thursday);
         days.add(friday);
         days.add(saturday);
-        return new ObjectMapper().writeValueAsString(days);
+        return "aa";
     }
 
 
