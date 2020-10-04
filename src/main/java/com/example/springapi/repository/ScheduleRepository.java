@@ -12,8 +12,6 @@ import java.util.Map;
 
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule,Long> {
-    //@Query("select s.monday as monday, s.tuesday as tuesday, s.wednesday as wednesday, s.thursday as thursday, s.friday as friday, s.saturday as saturday from schedule s where s.user_id = :id")
-    //Schedule getByUser_id(@Param("id") Long id);
 
 
 }

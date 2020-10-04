@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -21,11 +22,27 @@ import java.util.regex.Pattern;
 public class ScheduleController {
     @Autowired
     ScheduleRepository scheduleRepository;
-    private Schedule schedule;
 
     @GetMapping("/getAll")
     List<Schedule> get(){
         return scheduleRepository.findAll();
+    }
+
+    @PostMapping("/{id}")
+    Map<String, Object> addSchedule(@PathVariable("id") long id, @RequestBody Schedule schedule){
+        Map<String, Object> map = new HashMap<>();
+        Schedule sch = null;
+        try{
+            sch = scheduleRepository.getOne(id);
+        }catch (Exception e){
+
+        }
+        if(sch == null){
+            map.put("result", "error")
+        } else{
+            map.put("result", "done");
+        }
+        return map;
     }
 
     @GetMapping("/{id}")
