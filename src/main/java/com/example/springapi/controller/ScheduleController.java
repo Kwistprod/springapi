@@ -41,6 +41,7 @@ public class ScheduleController {
             map.put("result", "error");
         } else{
             map.put("result", sch.getUser_id());
+            map.put("name", sch.getMonday());
         }
         return map;
     }
