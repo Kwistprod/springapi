@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Entity(name="schedule")
 @EntityListeners(AuditingEntityListener.class)
 public class Schedule{
-
     @Id
     @Column(unique = true, nullable = false)
     private Long user_id;
