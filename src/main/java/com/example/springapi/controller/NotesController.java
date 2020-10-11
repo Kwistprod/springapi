@@ -22,8 +22,9 @@ public class NotesController {
         return notesRepository.getAll(id);
     }
     @PostMapping("/notes")
-    Map<String, String> addOne(@RequestBody List<Note> notes){
-        notesRepository.saveAll(notes);
+    @ResponseBody
+    Map<String, String> addAll(@RequestBody List<Note> notes){
+        List<Note> response = (List<Note>) notesRepository.saveAll(notes);
         Map<String, String> map = new HashMap<>();
         map.put("result", "done");
         return map;
