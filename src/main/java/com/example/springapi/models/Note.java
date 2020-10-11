@@ -2,18 +2,18 @@ package com.example.springapi.models;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name="notes")
 @EntityListeners(AuditingEntityListener.class)
 public class Note {
-    @Id
-    @Column(nullable = false)
-    private Long user_id;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long note_id;
+
+    @Column
+    private Long user_id;
     @Column(nullable = false)
     private String txt;
 
