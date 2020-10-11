@@ -34,12 +34,12 @@ public class Note {
         this.user_id = user_id;
     }
 
-    public String getNode() {
+    public String getNote() {
         return note;
     }
 
-    public void setNode(String node) {
-        this.note = node;
+    public void setNote(String note) {
+        this.note = note;
     }
 
 }
