@@ -24,7 +24,9 @@ public class NotesController {
     @PostMapping("/notes")
     @ResponseBody
     Map<String, String> addAll(@RequestBody List<Note> notes){
-        List<Note> response = (List<Note>) notesRepository.saveAll(notes);
+        //List<Note> response = (List<Note>) notesRepository.saveAll(notes);
+        Iterable<Note> adas = notes;
+        notesRepository.saveAll(adas);
         Map<String, String> map = new HashMap<>();
         map.put("result", "done");
         return map;
